@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tingkap Malam Berbintang</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(#020817, #10264b, #050b1b);
+  font-family: Arial, sans-serif;
+}
+
+.scene {
+  position: relative;
+  width: min(92vw, 850px);
+  padding: 28px;
+  border: 12px solid #593b2b;
+  border-radius: 16px;
+  background: #101d3c;
+  box-shadow: 0 0 45px #000c, inset 0 0 0 5px #c49a6c;
+}
+
+.sky {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: linear-gradient(#07142e, #172f55, #080f23);
+}
+
+.stars {
+  position: absolute;
+  inset: -100%;
+  background-image:
+    radial-gradient(2px 2px at 10% 20%, white 98%, transparent),
+    radial-gradient(3px 3px at 25% 65%, #fff5c4 98%, transparent),
+    radial-gradient(2px 2px at 45% 35%, white 98%, transparent),
+    radial-gradient(3px 3px at 70% 15%, white 98%, transparent),
+    radial-gradient(2px 2px at 85% 55%, #d9eaff 98%, transparent),
+    radial-gradient(2px 2px at 60% 80%, white 98%, transparent);
+  background-size: 190px 170px;
+  animation: drift 35s linear infinite, twinkle 2s ease-in-out infinite alternate;
+}
+
+.moon {
+  position: absolute;
+  top: 8%;
+  right: 12%;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: #fff1bd;
+  box-shadow: 0 0 35px #ffe8a6;
+}
+
+.moon::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 19px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #0a1835;
+}
+
+.window {
+  position: relative;
+  z-index: 2;
+  aspect-ratio: 16 / 9;
+  border: 9px solid #a7794f;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #030814;
+  box-shadow: 0 0 0 4px #3d281d;
+}
+
+.window iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.bar {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  background: #93643e;
+  box-shadow: 0 0 0 2px #c69a69;
+}
+
+.bar.vertical {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 7px;
+  transform: translateX(-50%);
+}
+
+.bar.horizontal {
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 7px;
+  transform: translateY(-50%);
+}
+
+.curtain {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  bottom: 0;
+  width: 25px;
+  background: repeating-linear-gradient(
+    90deg, #532a43 0 8px, #79405b 10px 16px
+  );
+}
+
+.curtain.left { left: 0; }
+.curtain.right { right: 0; }
+
+@keyframes twinkle {
+  from { opacity: .35; }
+  to { opacity: 1; }
+}
+
+@keyframes drift {
+  from { transform: translate(0, 0); }
+  to { transform: translate(190px, 170px); }
+}
+
+@media (max-width: 500px) {
+  .scene { padding: 16px; border-width: 8px; }
+  .window { border-width: 5px; }
+  .bar.vertical { width: 5px; }
+  .bar.horizontal { height: 5px; }
+}
+</style>
+</head>
+
+<body>
+  <div class="scene">
+    <div class="sky">
+      <div class="stars"></div>
+      <div class="moon"></div>
+    </div>
+
+    <div class="window">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/6FFESvSZHws"
+        title="Video YouTube"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+
+      <div class="bar vertical"></div>
+      <div class="bar horizontal"></div>
+    </div>
+
+    <div class="curtain left"></div>
+    <div class="curtain right"></div>
+  </div>
+</body>
+</html>
